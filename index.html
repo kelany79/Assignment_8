@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fffaf0" />
+    <meta name="description" content="Find a delicious recipe for tonight, save your favorites, and cook with confidence." />
+    <title>What's For Dinner</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="What's For Dinner home">
+          <span class="brand-mark"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span>
+          <span class="brand-text"><strong>What's For Dinner</strong><small>Your daily meal inspiration</small></span>
+        </a>
+        <nav class="header-actions" aria-label="Recipe tools">
+          <button class="icon-button" id="saved-button" type="button" aria-label="Saved recipes" title="Saved recipes"><i class="fa-solid fa-bookmark" aria-hidden="true"></i><span class="notification-dot" id="saved-dot" hidden></span></button>
+          <button class="icon-button" id="history-button" type="button" aria-label="Recently viewed recipes" title="Recently viewed"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></button>
+          <button class="icon-button" id="settings-button" type="button" aria-label="Settings" title="Settings"><i class="fa-solid fa-gear" aria-hidden="true"></i></button>
+          <button class="avatar-button" id="about-button" type="button" aria-label="About this app" title="About this app"><img src="avatar.jpg" alt="" /></button>
+        </nav>
+        <button class="mobile-menu-toggle" id="mobile-menu-button" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      </div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile recipe tools" hidden>
+        <button id="mobile-saved-button" type="button"><i class="fa-solid fa-bookmark" aria-hidden="true"></i>Saved Recipes</button>
+        <button id="mobile-history-button" type="button"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>Recent</button>
+        <button id="mobile-settings-button" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i>Settings</button>
+        <button id="mobile-about-button" type="button"><img src="avatar.jpg" alt="" />Profile</button>
+      </nav>
+    </header>
+
+    <main class="page-shell" id="main-content">
+      <article class="recipe-card" aria-labelledby="recipe-title">
+        <div class="recipe-visual">
+          <img id="recipe-image" src="carbonara.jpg" alt="Creamy spaghetti carbonara served on a plate" fetchpriority="high" />
+          <div class="image-shade"></div>
+          <div class="rating-pill"><i class="fa-solid fa-star rating-star" aria-hidden="true"></i><strong id="rating-average">4.8</strong><span id="rating-reviews">(234 reviews)</span></div>
+          <div class="quick-facts" aria-label="Recipe details">
+            <div><i class="fa-solid fa-clock fact-prep" aria-hidden="true"></i><span>Prep Time</span><strong id="prep-time">15 min</strong></div>
+            <div><i class="fa-solid fa-fire-burner fact-cook" aria-hidden="true"></i><span>Cook Time</span><strong id="cook-time">20 min</strong></div>
+            <div><i class="fa-solid fa-users fact-servings" aria-hidden="true"></i><span>Servings</span><strong id="servings">4 people</strong></div>
+          </div>
+        </div>
+
+        <div class="recipe-details">
+          <div class="recipe-main">
+            <div class="recipe-heading-row">
+              <div class="recipe-heading-copy">
+                <div class="badges"><span class="badge difficulty" id="difficulty">Easy</span><span class="badge category" id="category">Italian</span></div>
+                <h1 id="recipe-title">Creamy Spaghetti Carbonara</h1>
+                <p class="description" id="recipe-description">A classic Italian pasta dish with eggs, cheese, and pancetta</p>
+              </div>
+              <div class="recipe-actions">
+                <button class="soft-action" id="save-recipe-button" type="button" aria-label="Save recipe" aria-pressed="false" title="Save recipe"><i class="fa-solid fa-bookmark" aria-hidden="true"></i></button>
+                <button class="soft-action" id="share-button" type="button" aria-label="Share recipe" title="Share recipe"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <div class="time-warning" id="time-warning" hidden><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span><strong>Extended Preparation Time</strong><span>This recipe requires more than 45 minutes to prepare. Plan accordingly!</span></span></div>
+
+            <div class="tabs" role="tablist" aria-label="Recipe information">
+              <button class="tab active" id="tab-ingredients" type="button" role="tab" aria-selected="true" aria-controls="recipe-panel" data-tab="ingredients"><i class="fa-solid fa-list-check" aria-hidden="true"></i><span>Ingredients</span></button>
+              <button class="tab" id="tab-instructions" type="button" role="tab" aria-selected="false" aria-controls="recipe-panel" data-tab="instructions"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Instructions</span></button>
+              <button class="tab" id="tab-nutrition" type="button" role="tab" aria-selected="false" aria-controls="recipe-panel" data-tab="nutrition"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i><span>Nutrition</span></button>
+              <button class="tab" id="tab-tips" type="button" role="tab" aria-selected="false" aria-controls="recipe-panel" data-tab="tips"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i><span>Chef's Tips</span></button>
+            </div>
+            <section class="tab-panel" id="recipe-panel" role="tabpanel" aria-labelledby="tab-ingredients" tabindex="0"></section>
+          </div>
+          <div class="recipe-footer"><button class="primary-button" id="another-button" type="button"><i class="fa-solid fa-rotate" aria-hidden="true"></i>Try Another Recipe</button></div>
+        </div>
+      </article>
+    </main>
+
+    <dialog class="app-dialog" id="browse-dialog" aria-labelledby="browse-title">
+      <div class="dialog-inner">
+        <div class="dialog-heading"><div><span class="eyebrow">RECIPE COLLECTION</span><h2 id="browse-title">Find your next favorite</h2></div><button class="dialog-close" type="button" aria-label="Close browse recipes"><svg class="icon"><use href="#i-x" /></svg></button></div>
+        <label class="search-field"><svg class="icon"><use href="#i-search" /></svg><input id="recipe-search" type="search" placeholder="Search recipes or ingredients" autocomplete="off" maxlength="80" /><span class="sr-only">Search recipes or ingredients</span></label>
+        <div class="filter-chips" id="category-filters" aria-label="Filter by category"></div>
+        <div class="dialog-list" id="browse-list"></div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="saved-dialog" aria-labelledby="saved-title">
+      <div class="dialog-inner"><div class="dialog-heading"><div><span class="eyebrow">YOUR COLLECTION</span><h2 id="saved-title">Saved recipes</h2></div><button class="dialog-close" type="button" aria-label="Close saved recipes"><svg class="icon"><use href="#i-x" /></svg></button></div><div class="dialog-list" id="saved-list"></div></div>
+    </dialog>
+
+    <dialog class="app-dialog" id="history-dialog" aria-labelledby="history-title">
+      <div class="dialog-inner"><div class="dialog-heading"><div><span class="eyebrow">RECENTLY VIEWED</span><h2 id="history-title">Recipe history</h2></div><button class="dialog-close" type="button" aria-label="Close history"><svg class="icon"><use href="#i-x" /></svg></button></div><div class="dialog-list" id="history-list"></div><button class="text-button" id="clear-history-button" type="button">Clear history</button></div>
+    </dialog>
+
+    <dialog class="app-dialog compact-dialog" id="settings-dialog" aria-labelledby="settings-title">
+      <div class="dialog-inner"><div class="dialog-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2 id="settings-title">Settings</h2></div><button class="dialog-close" type="button" aria-label="Close settings"><svg class="icon"><use href="#i-x" /></svg></button></div>
+        <label class="setting-row" for="dark-mode"><span><strong>Dark mode</strong><small>A softer view for evening cooking</small></span><input id="dark-mode" type="checkbox" role="switch" /></label>
+        <label class="setting-row" for="picker-mode"><span><strong>Recipe picker</strong><small>Choose how “Try Another Recipe” works</small></span><select id="picker-mode"><option value="random">Surprise me</option><option value="sequential">In order</option></select></label>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog compact-dialog" id="about-dialog" aria-labelledby="about-title">
+      <div class="dialog-inner"><div class="dialog-heading"><div><span class="eyebrow">WELCOME, HOME COOK</span><h2 id="about-title">What's For Dinner</h2></div><button class="dialog-close" type="button" aria-label="Close about"><svg class="icon"><use href="#i-x" /></svg></button></div><p class="about-copy">A small recipe finder built with HTML, CSS, and JavaScript. Browse dishes, save the ones you love, and pick something tasty for tonight.</p><button class="primary-button about-browse" id="about-browse-button" type="button">Browse recipes <svg class="icon"><use href="#i-arrow" /></svg></button></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
+
